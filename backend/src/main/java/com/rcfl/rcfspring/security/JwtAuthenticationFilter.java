@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
  package com.rcfl.rcfspring.security;
 
 import com.rcfl.rcfspring.util.TokenUtil;
@@ -76,7 +76,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-=======
+
  package com.rcfl.rcfspring.security;
 
 import com.rcfl.rcfspring.util.TokenUtil;
@@ -154,5 +154,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

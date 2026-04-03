@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.dto.response;
 
 public class UserResponse {
@@ -16,9 +16,9 @@ public class UserResponse {
 
     private Boolean isActive;
 
-    /* =========================
+    /* ====
        Constructors
-       ========================= */
+       ==== */
 
     public UserResponse() {
     }
@@ -47,9 +47,9 @@ public class UserResponse {
         this.isActive = isActive;
     }
 
-    /* =========================
+    /* ====
        Getters
-       ========================= */
+       ==== */
 
     public Long getId() {
         return id;
@@ -91,9 +91,9 @@ public class UserResponse {
         return isActive;
     }
 
-    /* =========================
+    /* ====
        Setters (needed for JSON)
-       ========================= */
+       ==== */
 
     public void setId(Long id) {
         this.id = id;
@@ -134,7 +134,7 @@ public class UserResponse {
     public void setIsActive(Boolean active) {
         isActive = active;
     }
-=======
+
 package com.rcfl.rcfspring.dto.response;
 
 public class UserResponse {
@@ -152,9 +152,9 @@ public class UserResponse {
 
     private Boolean isActive;
 
-    /* =========================
+    /* ====
        Constructors
-       ========================= */
+       ==== */
 
     public UserResponse() {
     }
@@ -183,9 +183,9 @@ public class UserResponse {
         this.isActive = isActive;
     }
 
-    /* =========================
+    /* ====
        Getters
-       ========================= */
+       ==== */
 
     public Long getId() {
         return id;
@@ -227,9 +227,9 @@ public class UserResponse {
         return isActive;
     }
 
-    /* =========================
+    /* ====
        Setters (needed for JSON)
-       ========================= */
+       ==== */
 
     public void setId(Long id) {
         this.id = id;
@@ -270,5 +270,4 @@ public class UserResponse {
     public void setIsActive(Boolean active) {
         isActive = active;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

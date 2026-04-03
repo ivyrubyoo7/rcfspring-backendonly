@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.dto.request.LoginRequest;
@@ -25,9 +25,9 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    /* =====================================
+    /* ==
        LOGIN RESPONSE BUILDER (NO AUTH LOGIC)
-       ===================================== */
+       == */
 
     public LoginResponse login(LoginRequest request) {
 
@@ -36,9 +36,9 @@ public class AuthService {
         return buildLoginResponse(user);
     }
 
-    /* =====================================
+    /* ==
        COMMON USER FETCH METHOD
-       ===================================== */
+       == */
 
     public User findByEmail(String email) {
         User user = userRepository.findByEmail(email)
@@ -51,9 +51,9 @@ public class AuthService {
         return user;
     }
 
-    /* =====================================
+    /* ==
        RESPONSE BUILDER
-       ===================================== */
+       == */
 
     public LoginResponse buildLoginResponse(User user) {
 
@@ -86,9 +86,9 @@ public class AuthService {
         return response;
     }
 
-    /* =====================================
+    /* ==
        CHANGE PASSWORD (FIRST LOGIN)
-       ===================================== */
+       == */
 
     public void changePassword(ChangePasswordRequest request) {
 
@@ -114,7 +114,7 @@ public class AuthService {
 
         userRepository.save(user);
     }
-=======
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.dto.request.LoginRequest;
@@ -141,9 +141,9 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    /* =====================================
+    /* ==
        LOGIN RESPONSE BUILDER (NO AUTH LOGIC)
-       ===================================== */
+       == */
 
     public LoginResponse login(LoginRequest request) {
 
@@ -152,9 +152,9 @@ public class AuthService {
         return buildLoginResponse(user);
     }
 
-    /* =====================================
+    /* ==
        COMMON USER FETCH METHOD
-       ===================================== */
+       == */
 
     public User findByEmail(String email) {
         User user = userRepository.findByEmail(email)
@@ -167,9 +167,9 @@ public class AuthService {
         return user;
     }
 
-    /* =====================================
+    /* ==
        RESPONSE BUILDER
-       ===================================== */
+       == */
 
     public LoginResponse buildLoginResponse(User user) {
 
@@ -202,9 +202,9 @@ public class AuthService {
         return response;
     }
 
-    /* =====================================
+    /* ==
        CHANGE PASSWORD (FIRST LOGIN)
-       ===================================== */
+       == */
 
     public void changePassword(ChangePasswordRequest request) {
 
@@ -230,5 +230,4 @@ public class AuthService {
 
         userRepository.save(user);
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

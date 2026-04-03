@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.repository;
 
 import com.rcfl.rcfspring.entity.WorkPermit;
@@ -14,7 +14,7 @@ public interface WorkPermitRepository extends JpaRepository<WorkPermit, Long> {
 
     // ✅ Get last inserted permit (for sequential ID generation)
     Optional<WorkPermit> findTopByOrderByIdDesc();
-=======
+
 package com.rcfl.rcfspring.repository;
 
 import com.rcfl.rcfspring.entity.WorkPermit;
@@ -30,5 +30,4 @@ public interface WorkPermitRepository extends JpaRepository<WorkPermit, Long> {
 
     // ✅ Get last inserted permit (for sequential ID generation)
     Optional<WorkPermit> findTopByOrderByIdDesc();
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.rcfl.rcfspring.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
@@ -40,7 +39,6 @@ public class ChangePasswordRequest {
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
-=======
 package com.rcfl.rcfspring.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
@@ -82,5 +80,4 @@ public class ChangePasswordRequest {
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

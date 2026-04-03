@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.security;
 
 import com.rcfl.rcfspring.entity.User;
@@ -17,9 +17,9 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
-    /* =======================
+    /* ==
        ROLE AUTHORITIES
-       ======================= */
+       == */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -33,9 +33,9 @@ public class CustomUserDetails implements UserDetails {
         );
     }
 
-    /* =======================
+    /* ==
        USERNAME / PASSWORD
-       ======================= */
+       == */
 
     @Override
     public String getPassword() {
@@ -47,9 +47,9 @@ public class CustomUserDetails implements UserDetails {
         return user.getEmail();
     }
 
-    /* =======================
+    /* ==
        ACCOUNT STATUS
-       ======================= */
+       == */
 
     @Override
     public boolean isAccountNonExpired() {
@@ -71,9 +71,9 @@ public class CustomUserDetails implements UserDetails {
         return user.getIsActive() != null && user.getIsActive();
     }
 
-    /* =======================
+    /* ==
        HELPER METHODS
-       ======================= */
+       == */
 
     public Long getUserId() {
         return user.getId();
@@ -106,7 +106,7 @@ public class CustomUserDetails implements UserDetails {
     public User getUser() {
         return user;
     }
-=======
+
 package com.rcfl.rcfspring.security;
 
 import com.rcfl.rcfspring.entity.User;
@@ -125,9 +125,9 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
-    /* =======================
+    /* ==
        ROLE AUTHORITIES
-       ======================= */
+       == */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -141,9 +141,9 @@ public class CustomUserDetails implements UserDetails {
         );
     }
 
-    /* =======================
+    /* ==
        USERNAME / PASSWORD
-       ======================= */
+       == */
 
     @Override
     public String getPassword() {
@@ -155,9 +155,9 @@ public class CustomUserDetails implements UserDetails {
         return user.getEmail();
     }
 
-    /* =======================
+    /* ==
        ACCOUNT STATUS
-       ======================= */
+       == */
 
     @Override
     public boolean isAccountNonExpired() {
@@ -179,9 +179,9 @@ public class CustomUserDetails implements UserDetails {
         return user.getIsActive() != null && user.getIsActive();
     }
 
-    /* =======================
+    /* ==
        HELPER METHODS
-       ======================= */
+       == */
 
     public Long getUserId() {
         return user.getId();
@@ -214,5 +214,4 @@ public class CustomUserDetails implements UserDetails {
     public User getUser() {
         return user;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }   

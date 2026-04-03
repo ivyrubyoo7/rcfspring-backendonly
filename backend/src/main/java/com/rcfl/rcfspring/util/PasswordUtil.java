@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.util;
 
 import java.security.SecureRandom;
@@ -20,7 +20,7 @@ public class PasswordUtil {
         return password.toString();
     }
 }
-=======
+
 package com.rcfl.rcfspring.util;
 
 import java.security.SecureRandom;
@@ -42,4 +42,3 @@ public class PasswordUtil {
         return password.toString();
     }
 }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa

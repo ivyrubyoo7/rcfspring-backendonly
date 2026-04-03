@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.entity;
 
 import lombok.Data;
@@ -14,11 +14,11 @@ public class WorkPermit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ================= PERMIT CODE =================
+    // === PERMIT CODE ===
     @Column(name = "permit_code", unique = true, nullable = false)
     private String permitCode;
 
-    // ================= BASIC DETAILS =================
+    // === BASIC DETAILS ===
 
     @ManyToOne
     @JoinColumn(name = "plant_id", nullable = false)
@@ -33,7 +33,7 @@ public class WorkPermit {
 
     private String status; // PENDING / APPROVED / ACTIVE / REJECTED
 
-    // ================= USER RELATIONS =================
+    // === USER RELATIONS ===
 
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false)
@@ -51,12 +51,12 @@ public class WorkPermit {
     @JoinColumn(name = "approved_by")
     private User approvedBy;
 
-    // ================= TIMESTAMPS =================
+    // === TIMESTAMPS ===
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // ================= AUTO TIMESTAMP =================
+    // === AUTO TIMESTAMP ===
 
     @PrePersist
     protected void onCreate() {
@@ -72,7 +72,7 @@ public class WorkPermit {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
-=======
+
 package com.rcfl.rcfspring.entity;
 
 import lombok.Data;
@@ -88,11 +88,11 @@ public class WorkPermit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ================= PERMIT CODE =================
+    // === PERMIT CODE ===
     @Column(name = "permit_code", unique = true, nullable = false)
     private String permitCode;
 
-    // ================= BASIC DETAILS =================
+    // === BASIC DETAILS ===
 
     @ManyToOne
     @JoinColumn(name = "plant_id", nullable = false)
@@ -107,7 +107,7 @@ public class WorkPermit {
 
     private String status; // PENDING / APPROVED / ACTIVE / REJECTED
 
-    // ================= USER RELATIONS =================
+    // === USER RELATIONS ===
 
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false)
@@ -125,12 +125,12 @@ public class WorkPermit {
     @JoinColumn(name = "approved_by")
     private User approvedBy;
 
-    // ================= TIMESTAMPS =================
+    // === TIMESTAMPS ===
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // ================= AUTO TIMESTAMP =================
+    // === AUTO TIMESTAMP ===
 
     @PrePersist
     protected void onCreate() {
@@ -146,5 +146,4 @@ public class WorkPermit {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

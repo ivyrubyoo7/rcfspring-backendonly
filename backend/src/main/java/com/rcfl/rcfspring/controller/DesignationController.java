@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.entity.Designation;
@@ -21,7 +20,6 @@ public class DesignationController {
     public List<Designation> getAllDesignations() {
         return designationRepository.findAll();
     }
-=======
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.entity.Designation;
@@ -44,5 +42,3 @@ public class DesignationController {
     public List<Designation> getAllDesignations() {
         return designationRepository.findAll();
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
-}

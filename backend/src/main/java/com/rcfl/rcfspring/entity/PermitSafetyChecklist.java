@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -23,7 +23,7 @@ public class PermitSafetyChecklist {
     private Boolean isChecked;
 
     // getters & setters
-=======
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -48,5 +48,4 @@ public class PermitSafetyChecklist {
     private Boolean isChecked;
 
     // getters & setters
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

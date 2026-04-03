@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.security;
 
 import com.rcfl.rcfspring.entity.User;
@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         // Return custom user details object
         return new CustomUserDetails(user);
     }
-=======
+
 package com.rcfl.rcfspring.security;
 
 import com.rcfl.rcfspring.entity.User;
@@ -70,5 +70,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         // Return custom user details object
         return new CustomUserDetails(user);
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

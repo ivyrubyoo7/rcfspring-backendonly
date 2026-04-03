@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.exception;
 
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class CustomException extends RuntimeException {
         return status;
     }
 }
-=======
+
 package com.rcfl.rcfspring.exception;
 
 import org.springframework.http.HttpStatus;
@@ -44,4 +44,3 @@ public class CustomException extends RuntimeException {
         return status;
     }
 }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa

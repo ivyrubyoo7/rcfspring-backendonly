@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.dto.request;
 
 import lombok.Data;
@@ -19,7 +19,7 @@ public class WorkPermitRequest {
     private List<PermitPersonnelRequest> personnel;
 
     private List<PermitSafetyRequest> safetyChecklist;
-=======
+
 package com.rcfl.rcfspring.dto.request;
 
 import lombok.Data;
@@ -40,5 +40,4 @@ public class WorkPermitRequest {
     private List<PermitPersonnelRequest> personnel;
 
     private List<PermitSafetyRequest> safetyChecklist;
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

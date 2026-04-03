@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.dto.request;
 
 import jakarta.validation.constraints.Email;
@@ -29,7 +29,7 @@ public class LoginRequest {
         this.password = password;
     }
 }
-=======
+
 package com.rcfl.rcfspring.dto.request;
 
 import jakarta.validation.constraints.Email;
@@ -60,4 +60,3 @@ public class LoginRequest {
         this.password = password;
     }
 }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa

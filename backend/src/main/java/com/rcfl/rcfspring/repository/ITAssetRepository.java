@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.repository;
 
 import com.rcfl.rcfspring.entity.ITAsset;
@@ -10,7 +10,7 @@ public interface ITAssetRepository extends JpaRepository<ITAsset, Long> {
 
     boolean existsByDeviceNumber(String deviceNumber);
 
-=======
+
 package com.rcfl.rcfspring.repository;
 
 import com.rcfl.rcfspring.entity.ITAsset;
@@ -22,5 +22,4 @@ public interface ITAssetRepository extends JpaRepository<ITAsset, Long> {
 
     boolean existsByDeviceNumber(String deviceNumber);
 
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

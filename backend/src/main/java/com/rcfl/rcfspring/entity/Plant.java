@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -19,9 +19,9 @@ public class Plant {
     @Column(nullable = false, length = 150, unique = true)
     private String name;
 
-    /* =======================
+    /* ==
        Constructors
-       ======================= */
+       == */
 
     public Plant() {
     }
@@ -30,9 +30,9 @@ public class Plant {
         this.name = name;
     }
 
-    /* =======================
+    /* ==
        Getters & Setters
-       ======================= */
+       == */
 
     public Long getId() {
         return id;
@@ -46,9 +46,9 @@ public class Plant {
         this.name = name;
     }
 
-    /* =======================
+    /* ==
        toString (Helpful for Debug)
-       ======================= */
+       == */
 
     @Override
     public String toString() {
@@ -57,7 +57,7 @@ public class Plant {
                 ", name='" + name + '\'' +
                 '}';
     }
-=======
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -78,9 +78,9 @@ public class Plant {
     @Column(nullable = false, length = 150, unique = true)
     private String name;
 
-    /* =======================
+    /* ==
        Constructors
-       ======================= */
+       == */
 
     public Plant() {
     }
@@ -89,9 +89,9 @@ public class Plant {
         this.name = name;
     }
 
-    /* =======================
+    /* ==
        Getters & Setters
-       ======================= */
+       == */
 
     public Long getId() {
         return id;
@@ -105,9 +105,9 @@ public class Plant {
         this.name = name;
     }
 
-    /* =======================
+    /* ==
        toString (Helpful for Debug)
-       ======================= */
+       == */
 
     @Override
     public String toString() {
@@ -116,5 +116,4 @@ public class Plant {
                 ", name='" + name + '\'' +
                 '}';
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

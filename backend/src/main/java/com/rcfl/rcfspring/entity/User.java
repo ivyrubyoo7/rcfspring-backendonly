@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -22,9 +22,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /* =======================
+    /* ==
        Core Identity Fields
-       ======================= */
+       == */
 
     @Column(name = "employee_id", nullable = false, length = 50)
     private String employeeId;
@@ -42,9 +42,9 @@ public class User {
     @JsonIgnore
     private String passwordHash;
 
-    /* =======================
+    /* ==
        Relationships (FKs)
-       ======================= */
+       == */
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
@@ -66,18 +66,18 @@ public class User {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Plant plant;
 
-    /* =======================
+    /* ==
        Manager Hierarchy
-       ======================= */
+       == */
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     @JsonIgnore
     private User manager;
 
-    /* =======================
+    /* ==
        Account State
-       ======================= */
+       == */
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
@@ -94,9 +94,9 @@ public class User {
     @Column(name = "password_reset_expires_at")
     private LocalDateTime passwordResetExpiresAt;
 
-    /* =======================
+    /* ==
        Audit Fields
-       ======================= */
+       == */
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -104,9 +104,9 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    /* =======================
+    /* ==
        Lifecycle Hooks
-       ======================= */
+       == */
 
     @PrePersist
     protected void onCreate() {
@@ -119,9 +119,9 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
 
-    /* =======================
+    /* ==
        Getters & Setters
-       ======================= */
+       == */
 
     public Long getId() {
         return id;
@@ -254,7 +254,7 @@ public class User {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-=======
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -278,9 +278,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /* =======================
+    /* ==
        Core Identity Fields
-       ======================= */
+       == */
 
     @Column(name = "employee_id", nullable = false, length = 50)
     private String employeeId;
@@ -298,9 +298,9 @@ public class User {
     @JsonIgnore
     private String passwordHash;
 
-    /* =======================
+    /* ==
        Relationships (FKs)
-       ======================= */
+       == */
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
@@ -322,18 +322,18 @@ public class User {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Plant plant;
 
-    /* =======================
+    /* ==
        Manager Hierarchy
-       ======================= */
+       == */
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     @JsonIgnore
     private User manager;
 
-    /* =======================
+    /* ==
        Account State
-       ======================= */
+       == */
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
@@ -350,9 +350,9 @@ public class User {
     @Column(name = "password_reset_expires_at")
     private LocalDateTime passwordResetExpiresAt;
 
-    /* =======================
+    /* ==
        Audit Fields
-       ======================= */
+       == */
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -360,9 +360,9 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    /* =======================
+    /* ==
        Lifecycle Hooks
-       ======================= */
+       == */
 
     @PrePersist
     protected void onCreate() {
@@ -375,9 +375,9 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
 
-    /* =======================
+    /* ==
        Getters & Setters
-       ======================= */
+       == */
 
     public Long getId() {
         return id;
@@ -510,5 +510,4 @@ public class User {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

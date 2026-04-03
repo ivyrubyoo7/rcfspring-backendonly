@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -19,9 +19,9 @@ public class Department {
     @Column(nullable = false, length = 150)
     private String name;
 
-    /* =======================
+    /* ==
        Getters & Setters
-       ======================= */
+       == */
 
     public Long getId() {
         return id;
@@ -34,7 +34,7 @@ public class Department {
     public void setName(String name) {
         this.name = name;
     }
-=======
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -55,9 +55,9 @@ public class Department {
     @Column(nullable = false, length = 150)
     private String name;
 
-    /* =======================
+    /* ==
        Getters & Setters
-       ======================= */
+       == */
 
     public Long getId() {
         return id;
@@ -70,5 +70,4 @@ public class Department {
     public void setName(String name) {
         this.name = name;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

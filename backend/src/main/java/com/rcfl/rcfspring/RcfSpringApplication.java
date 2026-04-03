@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.rcfl.rcfspring;
 
 import org.springframework.boot.SpringApplication;
@@ -12,7 +11,7 @@ public class RcfSpringApplication {
     }
 
 }
-=======
+
 package com.rcfl.rcfspring;
 
 import org.springframework.boot.SpringApplication;
@@ -26,4 +25,3 @@ public class RcfSpringApplication {
     }
 
 }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa

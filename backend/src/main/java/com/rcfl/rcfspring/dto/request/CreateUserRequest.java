@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.dto.request;
 
 import jakarta.validation.constraints.Email;
@@ -7,9 +7,9 @@ import jakarta.validation.constraints.NotNull;
 
 public class CreateUserRequest {
 
-    /* =============================
+    /* =
        BASIC USER INFO
-       ============================= */
+       = */
 
     @NotBlank
     private String fullName;
@@ -23,9 +23,9 @@ public class CreateUserRequest {
 
     private String phone;
 
-    /* =============================
+    /* =
        RELATIONSHIPS
-       ============================= */
+       = */
 
     @NotNull
     private Long roleId;
@@ -41,9 +41,9 @@ public class CreateUserRequest {
     /* Optional manager reference */
     private Long managerId;
 
-    /* =============================
+    /* =
        GETTERS & SETTERS
-       ============================= */
+       = */
 
     public String getFullName() {
         return fullName;
@@ -116,7 +116,7 @@ public class CreateUserRequest {
     public void setManagerId(Long managerId) {
         this.managerId = managerId;
     }
-=======
+
 package com.rcfl.rcfspring.dto.request;
 
 import jakarta.validation.constraints.Email;
@@ -125,9 +125,9 @@ import jakarta.validation.constraints.NotNull;
 
 public class CreateUserRequest {
 
-    /* =============================
+    /* =
        BASIC USER INFO
-       ============================= */
+       = */
 
     @NotBlank
     private String fullName;
@@ -141,9 +141,9 @@ public class CreateUserRequest {
 
     private String phone;
 
-    /* =============================
+    /* =
        RELATIONSHIPS
-       ============================= */
+       = */
 
     @NotNull
     private Long roleId;
@@ -159,9 +159,9 @@ public class CreateUserRequest {
     /* Optional manager reference */
     private Long managerId;
 
-    /* =============================
+    /* =
        GETTERS & SETTERS
-       ============================= */
+       = */
 
     public String getFullName() {
         return fullName;
@@ -234,5 +234,4 @@ public class CreateUserRequest {
     public void setManagerId(Long managerId) {
         this.managerId = managerId;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

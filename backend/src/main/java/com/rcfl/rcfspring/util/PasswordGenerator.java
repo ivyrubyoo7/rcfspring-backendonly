@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +16,7 @@ public class PasswordGenerator {
         System.out.println("Raw Password: " + rawPassword);
         System.out.println("BCrypt Hash: " + hashedPassword);
     }
-=======
+
 package com.rcfl.rcfspring.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,5 +34,4 @@ public class PasswordGenerator {
         System.out.println("Raw Password: " + rawPassword);
         System.out.println("BCrypt Hash: " + hashedPassword);
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

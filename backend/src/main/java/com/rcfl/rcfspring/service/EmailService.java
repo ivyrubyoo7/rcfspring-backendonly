@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.service;
 
 import org.springframework.mail.SimpleMailMessage;
@@ -34,7 +34,7 @@ public class EmailService {
         mailSender.send(message);
     }
 }
-=======
+
 package com.rcfl.rcfspring.service;
 
 import org.springframework.mail.SimpleMailMessage;
@@ -70,4 +70,3 @@ public class EmailService {
         mailSender.send(message);
     }
 }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa

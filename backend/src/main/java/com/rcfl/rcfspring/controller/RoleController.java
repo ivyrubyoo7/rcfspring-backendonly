@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.entity.Role;
@@ -21,7 +20,6 @@ public class RoleController {
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
-=======
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.entity.Role;
@@ -44,5 +42,4 @@ public class RoleController {
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

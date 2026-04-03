@@ -23,9 +23,9 @@ public class AdminUserController {
         this.userService = userService;
     }
 
-        /* =====================================
+        /* ==
        RESPONSE DTO
-       ===================================== */
+       == */
 
     public static class CreateUserResponse {
 
@@ -46,9 +46,9 @@ public class AdminUserController {
         }
     }
 
-    /* =====================================
+    /* ==
        CREATE USER (ADMIN ONLY)
-       ===================================== */
+       == */
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -67,11 +67,11 @@ public class AdminUserController {
         return ResponseEntity.ok(response);
     }
 
-    /* =====================================
+    /* ==
        GET ALL USERS
        ADMIN → All users
        OFFICER → Filtered by plant
-       ===================================== */
+       == */
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN','OFFICER')")
@@ -82,9 +82,9 @@ public class AdminUserController {
         return ResponseEntity.ok(users);
     }
 
-    /* =====================================
+    /* ==
        GET USER BY ID
-       ===================================== */
+       == */
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','OFFICER')")
@@ -95,9 +95,9 @@ public class AdminUserController {
         return ResponseEntity.ok(user);
     }
 
-    /* =====================================
+    /* ==
        UPDATE USER (ADMIN ONLY)
-       ===================================== */
+       == */
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -111,9 +111,9 @@ public class AdminUserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    /* =====================================
+    /* ==
        DELETE USER (ADMIN ONLY)
-       ===================================== */
+       == */
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.dto.request.*;
@@ -23,7 +23,7 @@ public class WorkPermitService {
     private final PlantRepository plantRepository;
     private final DepartmentRepository departmentRepository;
 
-    // ================= CREATE PERMIT =================
+    // === CREATE PERMIT ===
 
     public WorkPermit createPermit(WorkPermitRequest request, Long userId) {
 
@@ -35,7 +35,7 @@ public class WorkPermitService {
 
         WorkPermit permit = new WorkPermit();
 
-        // ================= GENERATE PERMIT CODE =================
+        // === GENERATE PERMIT CODE ===
 
         String newPermitCode = "PTW-000001";
 
@@ -49,7 +49,7 @@ public class WorkPermitService {
 
         permit.setPermitCode(newPermitCode);
 
-        // ================= BASIC DETAILS =================
+        // === BASIC DETAILS ===
 
         permit.setPlant(plant);
         permit.setZone(request.getZone());
@@ -60,7 +60,7 @@ public class WorkPermitService {
         permit.setCreatedAt(LocalDateTime.now());
         permit.setUpdatedAt(LocalDateTime.now());
 
-        // ================= STATUS LOGIC =================
+        // === STATUS LOGIC ===
 
         if ("STANDARD".equalsIgnoreCase(request.getWorkCategory())) {
 
@@ -88,7 +88,7 @@ public class WorkPermitService {
         // 💾 SAVE PERMIT FIRST
         WorkPermit savedPermit = workPermitRepository.save(permit);
 
-        // ================= SAVE DEPARTMENTS =================
+        // === SAVE DEPARTMENTS ===
         if (request.getDepartmentIds() != null) {
             request.getDepartmentIds().forEach(deptId -> {
                 Department dept = departmentRepository.findById(deptId)
@@ -102,7 +102,7 @@ public class WorkPermitService {
             });
         }
 
-        // ================= SAVE PERSONNEL =================
+        // === SAVE PERSONNEL ===
         if (request.getPersonnel() != null) {
             request.getPersonnel().forEach(p -> {
                 PermitPersonnel person = new PermitPersonnel();
@@ -115,7 +115,7 @@ public class WorkPermitService {
             });
         }
 
-        // ================= SAVE SAFETY =================
+        // === SAVE SAFETY ===
         if (request.getSafetyChecklist() != null) {
             request.getSafetyChecklist().forEach(s -> {
                 PermitSafetyChecklist safety = new PermitSafetyChecklist();
@@ -130,18 +130,18 @@ public class WorkPermitService {
         return savedPermit;
     }
 
-    // ================= GET ACTIVE =================
+    // === GET ACTIVE ===
 
     public List<WorkPermit> getActivePermits() {
         return workPermitRepository.findByStatus("PENDING");
     }
 
-    // ================= GET HISTORY =================
+    // === GET HISTORY ===
 
     public List<WorkPermit> getHistoryPermits() {
         return workPermitRepository.findByStatus("APPROVED");
     }
-=======
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.dto.request.*;
@@ -166,7 +166,7 @@ public class WorkPermitService {
     private final PlantRepository plantRepository;
     private final DepartmentRepository departmentRepository;
 
-    // ================= CREATE PERMIT =================
+    // === CREATE PERMIT ===
 
     public WorkPermit createPermit(WorkPermitRequest request, Long userId) {
 
@@ -178,7 +178,7 @@ public class WorkPermitService {
 
         WorkPermit permit = new WorkPermit();
 
-        // ================= GENERATE PERMIT CODE =================
+        // === GENERATE PERMIT CODE ===
 
         String newPermitCode = "PTW-000001";
 
@@ -192,7 +192,7 @@ public class WorkPermitService {
 
         permit.setPermitCode(newPermitCode);
 
-        // ================= BASIC DETAILS =================
+        // === BASIC DETAILS ===
 
         permit.setPlant(plant);
         permit.setZone(request.getZone());
@@ -203,7 +203,7 @@ public class WorkPermitService {
         permit.setCreatedAt(LocalDateTime.now());
         permit.setUpdatedAt(LocalDateTime.now());
 
-        // ================= STATUS LOGIC =================
+        // === STATUS LOGIC ===
 
         if ("STANDARD".equalsIgnoreCase(request.getWorkCategory())) {
 
@@ -231,7 +231,7 @@ public class WorkPermitService {
         // 💾 SAVE PERMIT FIRST
         WorkPermit savedPermit = workPermitRepository.save(permit);
 
-        // ================= SAVE DEPARTMENTS =================
+        // === SAVE DEPARTMENTS ===
         if (request.getDepartmentIds() != null) {
             request.getDepartmentIds().forEach(deptId -> {
                 Department dept = departmentRepository.findById(deptId)
@@ -245,7 +245,7 @@ public class WorkPermitService {
             });
         }
 
-        // ================= SAVE PERSONNEL =================
+        // === SAVE PERSONNEL ===
         if (request.getPersonnel() != null) {
             request.getPersonnel().forEach(p -> {
                 PermitPersonnel person = new PermitPersonnel();
@@ -258,7 +258,7 @@ public class WorkPermitService {
             });
         }
 
-        // ================= SAVE SAFETY =================
+        // === SAVE SAFETY ===
         if (request.getSafetyChecklist() != null) {
             request.getSafetyChecklist().forEach(s -> {
                 PermitSafetyChecklist safety = new PermitSafetyChecklist();
@@ -273,16 +273,15 @@ public class WorkPermitService {
         return savedPermit;
     }
 
-    // ================= GET ACTIVE =================
+    // === GET ACTIVE ===
 
     public List<WorkPermit> getActivePermits() {
         return workPermitRepository.findByStatus("PENDING");
     }
 
-    // ================= GET HISTORY =================
+    // === GET HISTORY ===
 
     public List<WorkPermit> getHistoryPermits() {
         return workPermitRepository.findByStatus("APPROVED");
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

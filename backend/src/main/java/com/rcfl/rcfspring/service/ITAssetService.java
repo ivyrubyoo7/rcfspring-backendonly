@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.entity.ITAsset;
@@ -30,9 +30,9 @@ public class ITAssetService {
         this.departmentRepository = departmentRepository;
     }
 
-    /* ==============================
+    /* ==
        CREATE ASSET
-       ============================== */
+       == */
 
     public ITAsset createAsset(
             String assetType,
@@ -87,17 +87,17 @@ public class ITAssetService {
         return itAssetRepository.save(asset);
     }
 
-    /* ==============================
+    /* ==
        GET ALL ASSETS
-       ============================== */
+       == */
 
     public List<ITAsset> getAllAssets() {
         return itAssetRepository.findAll();
     }
 
-    /* ==============================
+    /* ==
        GET ASSET BY ID
-       ============================== */
+       == */
 
     public ITAsset getAssetById(Long id) {
 
@@ -109,9 +109,9 @@ public class ITAssetService {
                 .orElseThrow(() -> new CustomException("Asset not found"));
     }
 
-    /* ==============================
+    /* ==
        UPDATE ASSET
-       ============================== */
+       == */
 
     public ITAsset updateAsset(
             Long id,
@@ -158,9 +158,9 @@ public class ITAssetService {
         return itAssetRepository.save(asset);
     }
 
-    /* ==============================
+    /* ==
        DELETE ASSET
-       ============================== */
+       == */
 
     public void deleteAsset(Long id) {
 
@@ -173,7 +173,7 @@ public class ITAssetService {
 
         itAssetRepository.delete(asset);
     }
-=======
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.entity.ITAsset;
@@ -205,9 +205,9 @@ public class ITAssetService {
         this.departmentRepository = departmentRepository;
     }
 
-    /* ==============================
+    /* ==
        CREATE ASSET
-       ============================== */
+       == */
 
     public ITAsset createAsset(
             String assetType,
@@ -262,17 +262,17 @@ public class ITAssetService {
         return itAssetRepository.save(asset);
     }
 
-    /* ==============================
+    /* ==
        GET ALL ASSETS
-       ============================== */
+       == */
 
     public List<ITAsset> getAllAssets() {
         return itAssetRepository.findAll();
     }
 
-    /* ==============================
+    /* ==
        GET ASSET BY ID
-       ============================== */
+       == */
 
     public ITAsset getAssetById(Long id) {
 
@@ -284,9 +284,9 @@ public class ITAssetService {
                 .orElseThrow(() -> new CustomException("Asset not found"));
     }
 
-    /* ==============================
+    /* ==
        UPDATE ASSET
-       ============================== */
+       == */
 
     public ITAsset updateAsset(
             Long id,
@@ -333,9 +333,9 @@ public class ITAssetService {
         return itAssetRepository.save(asset);
     }
 
-    /* ==============================
+    /* ==
        DELETE ASSET
-       ============================== */
+       == */
 
     public void deleteAsset(Long id) {
 
@@ -348,5 +348,4 @@ public class ITAssetService {
 
         itAssetRepository.delete(asset);
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

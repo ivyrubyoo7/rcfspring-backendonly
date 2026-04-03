@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.dto.request.CreateUserRequest;
@@ -46,9 +46,9 @@ public class UserService {
         this.emailService = emailService;
     }
 
-    /* ========================================
+    /* =====
        CREATE USER (ADMIN FUNCTION)
-       ======================================== */
+       ===== */
 
     public String createUser(CreateUserRequest request) {
 
@@ -103,9 +103,9 @@ public class UserService {
         return tempPassword;
     }
 
-    /* ==========================================
+    /* 
        GET ALL USERS (ROLE + PLANT + DEPARTMENT)
-       ========================================== */
+        */
 
     public List<UserResponse> getAllUsers() {
 
@@ -136,9 +136,9 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    /* ========================================
+    /* =====
        GET USER BY ID (SECURED)
-       ======================================== */
+       ===== */
 
     public UserResponse getUserById(Long id) {
 
@@ -152,9 +152,9 @@ public class UserService {
         return mapToUserResponse(user);
     }
 
-    /* ========================================
+    /* =====
        UPDATE USER (SECURED)
-       ======================================== */
+       ===== */
 
     public UserResponse updateUser(Long id, CreateUserRequest request) {
 
@@ -196,9 +196,9 @@ public class UserService {
         return mapToUserResponse(user);
     }
 
-    /* ========================================
+    /* =====
        DELETE USER (SECURED)
-       ======================================== */
+       ===== */
 
     public void deleteUser(Long id) {
 
@@ -212,9 +212,9 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    /* ========================================
+    /* =====
        ACCESS VALIDATION (CORE SECURITY)
-       ======================================== */
+       ===== */
 
     private void validateAccess(CustomUserDetails currentUser, User targetUser) {
 
@@ -233,9 +233,9 @@ public class UserService {
         }
     }
 
-    /* ========================================
+    /* =====
        GET CURRENT USER
-       ======================================== */
+       ===== */
 
     private CustomUserDetails getCurrentUser() {
 
@@ -255,9 +255,9 @@ public class UserService {
         throw new CustomException("Invalid authentication principal");
     }
 
-    /* ========================================
+    /* =====
        MAPPER METHOD
-       ======================================== */
+       ===== */
 
     private UserResponse mapToUserResponse(User user) {
 
@@ -286,7 +286,7 @@ public class UserService {
                 user.getIsActive()
         );
     }
-=======
+
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.dto.request.CreateUserRequest;
@@ -334,9 +334,9 @@ public class UserService {
         this.emailService = emailService;
     }
 
-    /* ========================================
+    /* =====
        CREATE USER (ADMIN FUNCTION)
-       ======================================== */
+       ===== */
 
     public String createUser(CreateUserRequest request) {
 
@@ -391,9 +391,9 @@ public class UserService {
         return tempPassword;
     }
 
-    /* ==========================================
+    /* 
        GET ALL USERS (ROLE + PLANT + DEPARTMENT)
-       ========================================== */
+        */
 
     public List<UserResponse> getAllUsers() {
 
@@ -424,9 +424,9 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    /* ========================================
+    /* =====
        GET USER BY ID (SECURED)
-       ======================================== */
+       ===== */
 
     public UserResponse getUserById(Long id) {
 
@@ -440,9 +440,9 @@ public class UserService {
         return mapToUserResponse(user);
     }
 
-    /* ========================================
+    /* =====
        UPDATE USER (SECURED)
-       ======================================== */
+       ===== */
 
     public UserResponse updateUser(Long id, CreateUserRequest request) {
 
@@ -484,9 +484,9 @@ public class UserService {
         return mapToUserResponse(user);
     }
 
-    /* ========================================
+    /* =====
        DELETE USER (SECURED)
-       ======================================== */
+       ===== */
 
     public void deleteUser(Long id) {
 
@@ -500,9 +500,9 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    /* ========================================
+    /* =====
        ACCESS VALIDATION (CORE SECURITY)
-       ======================================== */
+       ===== */
 
     private void validateAccess(CustomUserDetails currentUser, User targetUser) {
 
@@ -521,9 +521,9 @@ public class UserService {
         }
     }
 
-    /* ========================================
+    /* =====
        GET CURRENT USER
-       ======================================== */
+       ===== */
 
     private CustomUserDetails getCurrentUser() {
 
@@ -543,9 +543,9 @@ public class UserService {
         throw new CustomException("Invalid authentication principal");
     }
 
-    /* ========================================
+    /* =====
        MAPPER METHOD
-       ======================================== */
+       ===== */
 
     private UserResponse mapToUserResponse(User user) {
 
@@ -574,5 +574,4 @@ public class UserService {
                 user.getIsActive()
         );
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

@@ -39,9 +39,9 @@ public class AuthController {
         this.customUserDetailsService = customUserDetailsService;
     }
 
-    /* =====================================
+    /* ==
        RESPONSE DTO (MOVE THIS UP)
-       ===================================== */
+       == */
 
     public static class ChangePasswordResponse {
 
@@ -56,9 +56,9 @@ public class AuthController {
         }
     }
 
-    /* =====================================
+    /* ==
        LOGIN
-       ===================================== */
+       == */
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(
@@ -83,9 +83,9 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    /* =====================================
+    /* ==
        CHANGE PASSWORD
-       ===================================== */
+       == */
 
     @PostMapping("/change-password")
     public ResponseEntity<ChangePasswordResponse> changePassword(

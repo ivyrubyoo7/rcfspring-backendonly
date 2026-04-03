@@ -41,9 +41,9 @@ public class SecurityConfig {
 
     }
 
-    /* ===============================
+    /* ===
        PASSWORD ENCODER
-       =============================== */
+       === */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -61,9 +61,9 @@ public class SecurityConfig {
         return authProvider;
     }
 
-    /* ===============================
+    /* ===
        SECURITY FILTER CHAIN
-       =============================== */
+       === */
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -129,9 +129,9 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /* ===============================
+    /* ===
        CORS CONFIGURATION
-       =============================== */
+       === */
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -157,9 +157,9 @@ public class SecurityConfig {
         return source;
     }
 
-    /* ===============================
+    /* ===
        AUTHENTICATION MANAGER
-       =============================== */
+       === */
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
@@ -168,9 +168,9 @@ public class SecurityConfig {
 
         }
 
-        /* ===============================
+        /* ===
         JWT FILTER
-        =============================== */
+        === */
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {

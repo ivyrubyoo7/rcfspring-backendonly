@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.dto.request.WorkPermitRequest;
@@ -47,7 +46,6 @@ public class WorkPermitController {
     public ResponseEntity<List<WorkPermit>> getHistoryPermits() {
         return ResponseEntity.ok(workPermitService.getHistoryPermits());
     }
-=======
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.dto.request.WorkPermitRequest;
@@ -96,5 +94,4 @@ public class WorkPermitController {
     public ResponseEntity<List<WorkPermit>> getHistoryPermits() {
         return ResponseEntity.ok(workPermitService.getHistoryPermits());
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

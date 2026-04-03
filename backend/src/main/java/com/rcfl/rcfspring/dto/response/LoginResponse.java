@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.dto.response;
 
 public class LoginResponse {
@@ -17,9 +17,9 @@ public class LoginResponse {
     // 🔥 ADD THIS (JWT TOKEN)
     private String token;
 
-    /* =========================
+    /* ====
        Constructors
-       ========================= */
+       ==== */
 
     public LoginResponse() {
     }
@@ -46,9 +46,9 @@ public class LoginResponse {
         this.token = token;
     }
 
-    /* =========================
+    /* ====
        Getters
-       ========================= */
+       ==== */
 
     public Long getUserId() {
         return userId;
@@ -86,9 +86,9 @@ public class LoginResponse {
         return token;
     }
 
-    /* =========================
+    /* ====
        Setters
-       ========================= */
+       ==== */
 
     public void setUserId(Long userId) {
         this.userId = userId;
@@ -125,7 +125,7 @@ public class LoginResponse {
     public void setToken(String token) {
         this.token = token;
     }
-=======
+
 package com.rcfl.rcfspring.dto.response;
 
 public class LoginResponse {
@@ -144,9 +144,9 @@ public class LoginResponse {
     // 🔥 ADD THIS (JWT TOKEN)
     private String token;
 
-    /* =========================
+    /* ====
        Constructors
-       ========================= */
+       ==== */
 
     public LoginResponse() {
     }
@@ -173,9 +173,9 @@ public class LoginResponse {
         this.token = token;
     }
 
-    /* =========================
+    /* ====
        Getters
-       ========================= */
+       ==== */
 
     public Long getUserId() {
         return userId;
@@ -213,9 +213,9 @@ public class LoginResponse {
         return token;
     }
 
-    /* =========================
+    /* ====
        Setters
-       ========================= */
+       ==== */
 
     public void setUserId(Long userId) {
         this.userId = userId;
@@ -252,5 +252,4 @@ public class LoginResponse {
     public void setToken(String token) {
         this.token = token;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

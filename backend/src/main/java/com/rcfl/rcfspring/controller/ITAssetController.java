@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.entity.ITAsset;
@@ -20,18 +19,18 @@ public class ITAssetController {
         this.itAssetService = itAssetService;
     }
 
-    /* =====================================
+    /* ==
        TEST ENDPOINT (for debugging)
-       ===================================== */
+       == */
 
     @GetMapping("/test")
     public String test() {
         return "IT Asset Controller Working";
     }
 
-    /* =====================================
+    /* ==
        CREATE ASSET
-       ===================================== */
+       == */
 
     @PostMapping
     public ResponseEntity<ITAsset> createAsset(@RequestBody CreateAssetRequest request) {
@@ -50,9 +49,9 @@ public class ITAssetController {
         return ResponseEntity.ok(asset);
     }
 
-    /* =====================================
+    /* ==
        GET ALL ASSETS
-       ===================================== */
+       == */
 
     @GetMapping
     public ResponseEntity<List<ITAsset>> getAllAssets() {
@@ -62,9 +61,9 @@ public class ITAssetController {
         return ResponseEntity.ok(assets);
     }
 
-    /* =====================================
+    /* ==
        GET ASSET BY ID
-       ===================================== */
+       == */
 
     @GetMapping("/{id}")
     public ResponseEntity<ITAsset> getAssetById(@PathVariable Long id) {
@@ -74,9 +73,9 @@ public class ITAssetController {
         return ResponseEntity.ok(asset);
     }
 
-    /* =====================================
+    /* ==
        UPDATE ASSET
-       ===================================== */
+       == */
 
     @PutMapping("/{id}")
     public ResponseEntity<ITAsset> updateAsset(
@@ -99,9 +98,9 @@ public class ITAssetController {
         return ResponseEntity.ok(asset);
     }
 
-    /* =====================================
+    /* ==
        DELETE ASSET
-       ===================================== */
+       == */
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAsset(@PathVariable Long id) {
@@ -111,9 +110,9 @@ public class ITAssetController {
         return ResponseEntity.ok("Asset deleted successfully");
     }
 
-    /* =====================================
+    /* ==
        REQUEST DTO
-       ===================================== */
+       == */
 
     public static class CreateAssetRequest {
 
@@ -167,7 +166,6 @@ public class ITAssetController {
         public String getStatus() { return status; }
         public void setStatus(String status) { this.status = status; }
     }
-=======
 package com.rcfl.rcfspring.controller;
 
 import com.rcfl.rcfspring.entity.ITAsset;
@@ -189,18 +187,18 @@ public class ITAssetController {
         this.itAssetService = itAssetService;
     }
 
-    /* =====================================
+    /* ==
        TEST ENDPOINT (for debugging)
-       ===================================== */
+       == */
 
     @GetMapping("/test")
     public String test() {
         return "IT Asset Controller Working";
     }
 
-    /* =====================================
+    /* ==
        CREATE ASSET
-       ===================================== */
+       == */
 
     @PostMapping
     public ResponseEntity<ITAsset> createAsset(@RequestBody CreateAssetRequest request) {
@@ -219,9 +217,9 @@ public class ITAssetController {
         return ResponseEntity.ok(asset);
     }
 
-    /* =====================================
+    /* ==
        GET ALL ASSETS
-       ===================================== */
+       == */
 
     @GetMapping
     public ResponseEntity<List<ITAsset>> getAllAssets() {
@@ -231,9 +229,9 @@ public class ITAssetController {
         return ResponseEntity.ok(assets);
     }
 
-    /* =====================================
+    /* ==
        GET ASSET BY ID
-       ===================================== */
+       == */
 
     @GetMapping("/{id}")
     public ResponseEntity<ITAsset> getAssetById(@PathVariable Long id) {
@@ -243,9 +241,9 @@ public class ITAssetController {
         return ResponseEntity.ok(asset);
     }
 
-    /* =====================================
+    /* ==
        UPDATE ASSET
-       ===================================== */
+       == */
 
     @PutMapping("/{id}")
     public ResponseEntity<ITAsset> updateAsset(
@@ -268,9 +266,9 @@ public class ITAssetController {
         return ResponseEntity.ok(asset);
     }
 
-    /* =====================================
+    /* ==
        DELETE ASSET
-       ===================================== */
+       == */
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAsset(@PathVariable Long id) {
@@ -280,9 +278,9 @@ public class ITAssetController {
         return ResponseEntity.ok("Asset deleted successfully");
     }
 
-    /* =====================================
+    /* ==
        REQUEST DTO
-       ===================================== */
+       == */
 
     public static class CreateAssetRequest {
 
@@ -336,5 +334,4 @@ public class ITAssetController {
         public String getStatus() { return status; }
         public void setStatus(String status) { this.status = status; }
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

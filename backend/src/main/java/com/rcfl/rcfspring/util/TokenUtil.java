@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
  package com.rcfl.rcfspring.util;
 
 import io.jsonwebtoken.Claims;
@@ -21,17 +21,17 @@ public class TokenUtil {
 
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 hours
 
-    /* =========================
+    /* ====
        SIGNING KEY
-       ========================= */
+       ==== */
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    /* =========================
+    /* ====
        GENERATE TOKEN
-       ========================= */
+       ==== */
 
     public String generateToken(UserDetails userDetails) {
 
@@ -43,25 +43,25 @@ public class TokenUtil {
                 .compact();
     }
 
-    /* =========================
+    /* ====
        EXTRACT USERNAME
-       ========================= */
+       ==== */
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    /* =========================
+    /* ====
        EXTRACT EXPIRATION
-       ========================= */
+       ==== */
 
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    /* =========================
+    /* ====
        GENERIC CLAIM EXTRACTOR
-       ========================= */
+       ==== */
 
     public <T> T extractClaim(String token, Function<Claims, T> resolver) {
         final Claims claims = extractAllClaims(token);
@@ -76,9 +76,9 @@ public class TokenUtil {
                 .getPayload();
     }
 
-    /* =========================
+    /* ====
        VALIDATE TOKEN
-       ========================= */
+       ==== */
 
     public boolean validateToken(String token, UserDetails userDetails) {
 
@@ -91,7 +91,7 @@ public class TokenUtil {
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-=======
+
  package com.rcfl.rcfspring.util;
 
 import io.jsonwebtoken.Claims;
@@ -114,17 +114,17 @@ public class TokenUtil {
 
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 hours
 
-    /* =========================
+    /* ====
        SIGNING KEY
-       ========================= */
+       ==== */
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    /* =========================
+    /* ====
        GENERATE TOKEN
-       ========================= */
+       ==== */
 
     public String generateToken(UserDetails userDetails) {
 
@@ -136,25 +136,25 @@ public class TokenUtil {
                 .compact();
     }
 
-    /* =========================
+    /* ====
        EXTRACT USERNAME
-       ========================= */
+       ==== */
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    /* =========================
+    /* ====
        EXTRACT EXPIRATION
-       ========================= */
+       ==== */
 
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    /* =========================
+    /* ====
        GENERIC CLAIM EXTRACTOR
-       ========================= */
+       ==== */
 
     public <T> T extractClaim(String token, Function<Claims, T> resolver) {
         final Claims claims = extractAllClaims(token);
@@ -169,9 +169,9 @@ public class TokenUtil {
                 .getPayload();
     }
 
-    /* =========================
+    /* ====
        VALIDATE TOKEN
-       ========================= */
+       ==== */
 
     public boolean validateToken(String token, UserDetails userDetails) {
 
@@ -184,5 +184,4 @@ public class TokenUtil {
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -44,9 +44,9 @@ public class ITAsset {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    /* ==========================
+    /* =====
        AUTO TIMESTAMP
-       ========================== */
+       ===== */
 
     @PrePersist
     protected void onCreate() {
@@ -59,9 +59,9 @@ public class ITAsset {
         updatedAt = LocalDateTime.now();
     }
 
-    /* ==========================
+    /* =====
        GETTERS AND SETTERS
-       ========================== */
+       ===== */
 
     public Long getId() {
         return id;
@@ -138,7 +138,7 @@ public class ITAsset {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-=======
+
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -184,9 +184,9 @@ public class ITAsset {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    /* ==========================
+    /* =====
        AUTO TIMESTAMP
-       ========================== */
+       ===== */
 
     @PrePersist
     protected void onCreate() {
@@ -199,9 +199,9 @@ public class ITAsset {
         updatedAt = LocalDateTime.now();
     }
 
-    /* ==========================
+    /* =====
        GETTERS AND SETTERS
-       ========================== */
+       ===== */
 
     public Long getId() {
         return id;
@@ -278,5 +278,4 @@ public class ITAsset {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
->>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }
