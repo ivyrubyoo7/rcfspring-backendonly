@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.rcfl.rcfspring.exception;
 
 import org.springframework.http.HttpStatus;
@@ -20,3 +21,27 @@ public class CustomException extends RuntimeException {
         return status;
     }
 }
+=======
+package com.rcfl.rcfspring.exception;
+
+import org.springframework.http.HttpStatus;
+
+public class CustomException extends RuntimeException {
+
+    private final HttpStatus status;
+
+    public CustomException(String message) {
+        super(message);
+        this.status = HttpStatus.BAD_REQUEST;
+    }
+
+    public CustomException(String message, HttpStatus status) {
+        super(message);
+        this.status = status;
+    }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+}
+>>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.rcfl.rcfspring.entity;
 
 import jakarta.persistence.*;
@@ -22,4 +23,30 @@ public class PermitSafetyChecklist {
     private Boolean isChecked;
 
     // getters & setters
+=======
+package com.rcfl.rcfspring.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "permit_safety_checklist")
+public class PermitSafetyChecklist {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "permit_id")
+    private WorkPermit permit;
+
+    @Column(columnDefinition = "TEXT")
+    private String checklistItem;
+
+    private Boolean isChecked;
+
+    // getters & setters
+>>>>>>> a5738637bd136429337237ffc679f7eedef8c1aa
 }
