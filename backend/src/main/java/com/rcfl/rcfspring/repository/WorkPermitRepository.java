@@ -1,4 +1,3 @@
-
 package com.rcfl.rcfspring.repository;
 
 import com.rcfl.rcfspring.entity.WorkPermit;
@@ -15,19 +14,12 @@ public interface WorkPermitRepository extends JpaRepository<WorkPermit, Long> {
     // ✅ Get last inserted permit (for sequential ID generation)
     Optional<WorkPermit> findTopByOrderByIdDesc();
 
-package com.rcfl.rcfspring.repository;
+    List<WorkPermit> findByAssignedManager_IdAndStatus(Long managerId, String status);
 
-import com.rcfl.rcfspring.entity.WorkPermit;
-import org.springframework.data.jpa.repository.JpaRepository;
+    List<WorkPermit> findByAssignedOfficer_IdAndStatus(Long officerId, String status);
 
-import java.util.List;
-import java.util.Optional;
+    List<WorkPermit> findByStatusIn(List<String> statuses);
 
-public interface WorkPermitRepository extends JpaRepository<WorkPermit, Long> {
+    List<WorkPermit> findByPlantId(Long plantId);
 
-    // ✅ Fetch permits by status
-    List<WorkPermit> findByStatus(String status);
-
-    // ✅ Get last inserted permit (for sequential ID generation)
-    Optional<WorkPermit> findTopByOrderByIdDesc();
 }

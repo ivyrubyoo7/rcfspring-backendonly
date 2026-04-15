@@ -1,0 +1,230 @@
+/* ================= GLOBAL PAGE ================= */
+
+.report-dashboard {
+  padding: 25px;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+
+/* ================= CARD (CONFIG SECTION) ================= */
+
+.card {
+  border-radius: 14px;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* ================= FORM ================= */
+
+label {
+  font-weight: 500;
+  font-size: 13px;
+  color: #475569;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 0.15rem rgba(59,130,246,0.25);
+}
+
+/* ================= BUTTONS ================= */
+
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: none;
+}
+
+/* ================= REPORT PAPER ================= */
+
+.report-preview-outer {
+  background: #e2e8f0;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* A4 Sheet */
+.printable-document {
+  width: 210mm;
+  min-height: 297mm;
+  background: #ffffff;
+  padding: 25mm;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.doc-header {
+  border-bottom: 2px solid #1e293b;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.rcf-brand h1 {
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.doc-meta h5 {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.doc-meta p {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* ================= TITLE ================= */
+
+.doc-content h4 {
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0f172a;
+}
+
+/* ================= TEXT ================= */
+
+.executive-summary {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.6;
+}
+
+/* ================= TABLE ================= */
+
+.report-table {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.report-table th {
+  background: #f8fafc;
+  color: #1e293b;
+  font-weight: 600;
+  padding: 12px;
+}
+
+.report-table td {
+  padding: 12px;
+  color: #334155;
+}
+
+.report-table tr:hover {
+  background: #f1f5f9;
+}
+
+/* ================= STATUS BADGES ================= */
+
+.report-status-verified {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.report-status-pending {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.report-status-critical {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* ================= NOTES ================= */
+
+.additional-notes {
+  margin-top: 25px;
+}
+
+.notes-placeholder {
+  border: 1px dashed #cbd5f5;
+  padding: 15px;
+  background: #f8fafc;
+  font-style: italic;
+}
+
+/* ================= SIGNATURE ================= */
+
+.signature-grid {
+  margin-top: 60px;
+}
+
+.signature-box {
+  text-align: center;
+}
+
+.signature-line {
+  border-top: 1px solid #000;
+  margin: 40px 20px 10px;
+}
+
+/* ================= FOOTER ================= */
+
+.doc-footer {
+  margin-top: 30px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+.rcf-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rcf-logo-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.rcf-text h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.rcf-text p {
+  margin: 0;
+  font-size: 11px;
+  color: #64748b;
+}

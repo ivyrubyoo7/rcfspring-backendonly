@@ -1,0 +1,455 @@
+/* ============================================================
+   1. GLOBAL CONTAINER & VISIBILITY FIXES
+   ============================================================ */
+
+.wp-container {
+  padding: 24px;
+  background: #f1f5f9; /* Light grey background */
+  min-height: 5vh;
+  /* Force dark readable text globally inside this container */
+  color: #1e293b !important;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Force all text elements to be dark slate/black */
+.wp-container h1, .wp-container h2, .wp-container h3, .wp-container h4,
+.wp-container p, .wp-container label, .wp-container span, .wp-container .check-text {
+  color: #1e293b !important;
+}
+
+.wp-container .card {
+  background: #ffffff !important; /* Pure white card */
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   2. FORM ELEMENTS & GRID
+   ============================================================ */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.wp-container label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Standard Inputs & Selects */
+.wp-container input:not([type="checkbox"]),
+.wp-container select,
+.wp-container textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #f8fafc;
+  height: 42px; /* Fixed height for all */
+  transition: all 0.2s ease;
+  color: #1e293b;
+}
+
+.wp-container input:focus, .wp-container select:focus {
+  border-color: #4a90e2;
+  background: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* ============================================================
+   3. INLINE ROW ALIGNMENT (Dropdown + Add Button)
+   ============================================================ */
+
+.inline-row {
+  display: flex;
+  gap: 12px;
+  align-items: center; /* Aligns items perfectly level */
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Make select flexible so button fits on the same line */
+.inline-row select {
+  flex: 1;
+  margin: 0 !important; /* Kill the auto-margins from global rules */
+}
+
+.mini-btn {
+  background: #1e293b;
+  color: white !important;
+  border: none;
+  padding: 0 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 42px; /* Matches the select height exactly */
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.mini-btn:hover {
+  background: #000000;
+}
+
+/* ============================================================
+   4. SAFETY CHECKLIST (THE GRID FIX)
+   ============================================================ */
+
+.checklist-box {
+  margin-top: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.check-item {
+  display: grid;
+  grid-template-columns: 45px 1fr 45px; /* Fixed columns: Box | Text | Remove */
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  background: white;
+}
+
+.check-item:last-child {
+  border-bottom: none;
+}
+
+.check-item:hover {
+  background: #f8fafc;
+}
+
+/* Checkbox specific fix */
+.check-item input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 auto !important;
+  cursor: pointer;
+}
+
+.check-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155 !important;
+}
+
+/* Delete (X) Icon Button */
+.delete-icon-btn {
+  background: #fee2e2 !important; /* Soft Red */
+  border: none;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #ef4444 !important;
+  margin: 0 auto;
+  transition: transform 0.2s;
+}
+
+.delete-icon-btn:hover {
+  transform: scale(1.1);
+  background: #fecaca !important;
+}
+
+/* ============================================================
+   5. PERSONNEL (WORKER ROWS)
+   ============================================================ */
+
+.worker-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 12px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.worker-row input, .worker-row select {
+  margin: 0 !important; /* Remove gaps inside worker grid */
+}
+
+/* ============================================================
+   6. ACTIONS & STATUS
+   ============================================================ */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.primary-btn {
+  background: #16a34a; /* Success Green */
+  color: white !important;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: #15803d;
+}
+
+.danger-btn {
+  background: #ef4444;
+  color: white !important;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 42px;
+}
+
+/* ============================================================
+   7. RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .worker-row { grid-template-columns: 1fr 1fr; }
+  .worker-row .danger-btn { grid-column: span 2; }
+}
+.check-item {
+  display: grid !important;
+  grid-template-columns: 30px 1fr 40px !important;
+  align-items: center !important;
+}
+/* ============================================================
+   UPDATED TAB LOGIC (INACTIVE -> HOVER -> ACTIVE)
+   ============================================================ */
+
+.wp-tabs {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.wp-tabs button {
+  padding: 12px 24px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  /* 1. DEFAULT STATE: White Background, Black Text */
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.wp-tabs button:hover {
+  /* 2. HOVER STATE: Grey Background, White Text */
+  background-color: #64748b !important;
+  color: #ffffff !important;
+  border-color: #64748b;
+}
+
+.wp-tabs button.active {
+  /* 3. ACTIVE STATE: Black Background, White Text */
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000;
+}
+
+/* Optional: Subtle pulse or scale effect when clicking */
+.wp-tabs button:active {
+  transform: scale(0.98);
+}
+/* REMOVE ICON BACKGROUND ONLY (SAFE FIX) */
+/* FORCE ICON VISIBILITY */
+.icon-btn {
+  background: transparent !important;
+  border: none;
+  box-shadow: none !important;
+  color: #1e293b !important; /* 🔥 important fix */
+}
+
+/* Specific colors */
+.view-btn {
+  color: #2563eb !important;
+}
+
+.edit-btn {
+  color: #16a34a !important;
+}
+
+.delete-btn {
+  color: #ef4444 !important;
+}
+/* FIX ACTION ICON SPACING */
+.action-cell {
+  display: flex;
+  gap: 6px;              /* 🔥 reduce space between icons */
+  justify-content: flex-start;  /* align left instead of spreading */
+  align-items: center;
+}
+
+/* make buttons compact */
+.icon-btn {
+  padding: 2px 4px;      /* 🔥 reduce size */
+  font-size: 14px;
+}
+/* ============================= */
+/* UPGRADED TABLE (LIKE ASSETS) */
+/* ============================= */
+
+.wp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+/* HEADER */
+.wp-table th {
+  background: #f1f5f9;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+}
+
+/* CELLS */
+.wp-table td {
+  padding: 14px;
+  font-size: 14px;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+/* REMOVE LAST RIGHT BORDER */
+.wp-table th:last-child,
+.wp-table td:last-child {
+  border-right: none;
+}
+
+/* ROW HOVER */
+.wp-table tr:hover {
+  background: #f8fafc;
+}
+
+/* notif bell*/
+.badge {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.notification-card {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 300px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.notif-item {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+/* Notification Bell */
+.badge {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.notification-card {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 300px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.notif-item {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+
+.approve-btn {
+  background: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.active {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}

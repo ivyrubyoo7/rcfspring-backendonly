@@ -1,0 +1,100 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root container */
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure body behaves like a dashboard app */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  background-color: #f3f4f6;
+  color: #111827; /* near-black for readability */
+  line-height: 1.5;
+}
+
+/* Remove default link styling (use Bootstrap utilities instead) */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Utility class if needed later */
+.hidden {
+  display: none;
+}
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+/* main content */
+.main-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-x: hidden;
+  min-width: 0; /* prevents flex overflow */
+}
+
+
+/* mobile */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+}
+/* Mobile hamburger button */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1100;
+  background: #111827;
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Show only on mobile */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+@media (min-width: 769px) {
+  .sidebar-backdrop {
+    display: none;
+  }
+}
+/* DESKTOP LAYOUT */
+@media (min-width: 769px) {
+  .main-content {
+    margin-left: 260px;
+    transition: margin-left 0.3s ease;
+  }
+
+  .sidebar.collapsed ~ .main-content {
+    margin-left: 80px;
+  }
+}

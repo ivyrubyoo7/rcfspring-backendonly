@@ -1,5 +1,8 @@
 package com.rcfl.rcfspring.config;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpMethod;
+
 import com.rcfl.rcfspring.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,9 +44,9 @@ public class SecurityConfig {
 
     }
 
-    /* ===
+    /* ===============================
        PASSWORD ENCODER
-       === */
+       =============================== */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,9 +54,10 @@ public class SecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+    public org.springframework.security.authentication.dao.DaoAuthenticationProvider authenticationProvider() {
 
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        org.springframework.security.authentication.dao.DaoAuthenticationProvider authProvider =
+                new org.springframework.security.authentication.dao.DaoAuthenticationProvider();
 
         authProvider.setUserDetailsService(customUserDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
@@ -61,9 +65,9 @@ public class SecurityConfig {
         return authProvider;
     }
 
-    /* ===
+    /* ===============================
        SECURITY FILTER CHAIN
-       === */
+       =============================== */
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -78,11 +82,21 @@ public class SecurityConfig {
                 )
                 .authenticationProvider(authenticationProvider())
                 .userDetailsService(customUserDetailsService)
-
+                .securityMatcher("/api/**")   // ✅ FIXED
                 .authorizeHttpRequests(auth -> auth
 
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+
                         /* Public APIs */
-                        .requestMatchers("/api/auth/**", "/test/**").permitAll()
+                        .requestMatchers(
+                                "/api/auth/login",
+                                "/api/auth/register"
+                        ).permitAll()
+
+                        .requestMatchers("/api/auth/change-password")
+                        .authenticated()
+
+                        .requestMatchers("/test/**").permitAll()
 
                         /* Dropdown APIs */
                         .requestMatchers(
@@ -92,14 +106,15 @@ public class SecurityConfig {
                                 "/api/roles/**"
                         ).authenticated()
 
-                        /* Permit creation by ADMIN OFFICER MANAGER */
-                        .requestMatchers("/api/permits/**")
-                        .hasAnyRole("ADMIN", "OFFICER", "MANAGER")
 
-                        /* USERS API (ADMIN) */
+                        /* USERS API (ROLE-BASED ACCESS) */
 
                         .requestMatchers("/api/assets/**")
-                        .hasAnyRole("ADMIN", "OFFICER")
+                        .hasAnyRole("ADMIN", "OFFICER", "MANAGER")
+
+                        // TODO: Restrict POST /api/users to ADMIN only (security hardening)
+                        .requestMatchers("/api/users/**")
+                        .hasAnyRole("ADMIN", "OFFICER", "MANAGER")
 
                         /* Other Admin APIs (STRICT ADMIN ONLY) */
                         .requestMatchers("/api/admin/**")
@@ -121,24 +136,32 @@ public class SecurityConfig {
                         .requestMatchers("/api/contractor/**")
                         .hasAnyRole("CONTRACTOR", "ADMIN")
 
+                        /*Work permit*/
+                        .requestMatchers("/api/permits/**")
+                        .hasAnyRole("ADMIN", "MANAGER", "OFFICER")
+
                         .anyRequest().authenticated()
                 )
 
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((req, res, e) -> {
+                            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                        })
+                )
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
-    /* ===
+    /* ===============================
        CORS CONFIGURATION
-       === */
+       =============================== */
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
         configuration.setAllowedMethods(List.of(
                 "GET",
                 "POST",
@@ -157,9 +180,9 @@ public class SecurityConfig {
         return source;
     }
 
-    /* ===
+    /* ===============================
        AUTHENTICATION MANAGER
-       === */
+       =============================== */
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
@@ -168,9 +191,9 @@ public class SecurityConfig {
 
         }
 
-        /* ===
+        /* ===============================
         JWT FILTER
-        === */
+        =============================== */
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {

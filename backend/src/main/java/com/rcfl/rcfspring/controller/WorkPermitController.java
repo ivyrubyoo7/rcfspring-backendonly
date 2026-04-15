@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.rcfl.rcfspring.security.CustomUserDetails;
+import com.rcfl.rcfspring.repository.UserRepository;
+import com.rcfl.rcfspring.entity.User;
 
 import java.util.List;
 
@@ -20,16 +21,16 @@ import java.util.List;
 public class WorkPermitController {
 
     private final WorkPermitService workPermitService;
+    private final UserRepository userRepository;
 
     // ✅ Create Permit
     @PostMapping
     public ResponseEntity<WorkPermit> createPermit(@RequestBody WorkPermitRequest request) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-
-        Long userId = userDetails.getUserId();  // 🔥 dynamic
+        String username = authentication.getName();
+        User user = userRepository.findByEmail(username)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+        Long userId = user.getId();
 
         WorkPermit permit = workPermitService.createPermit(request, userId);
         return ResponseEntity.ok(permit);
@@ -38,7 +39,16 @@ public class WorkPermitController {
     // ✅ Get Active Permits
     @GetMapping("/active")
     public ResponseEntity<List<WorkPermit>> getActivePermits() {
-        return ResponseEntity.ok(workPermitService.getActivePermits());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<WorkPermit> permits = workPermitService.getActivePermits(user);
+
+        return ResponseEntity.ok(permits);
     }
 
     // ✅ Get History Permits
@@ -46,52 +56,49 @@ public class WorkPermitController {
     public ResponseEntity<List<WorkPermit>> getHistoryPermits() {
         return ResponseEntity.ok(workPermitService.getHistoryPermits());
     }
-package com.rcfl.rcfspring.controller;
 
-import com.rcfl.rcfspring.dto.request.WorkPermitRequest;
-import com.rcfl.rcfspring.entity.WorkPermit;
-import com.rcfl.rcfspring.service.WorkPermitService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+    @GetMapping("/pending-approvals")
+    public ResponseEntity<?> getPendingApprovals() {
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import com.rcfl.rcfspring.security.CustomUserDetails;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
 
-import java.util.List;
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-@RestController
-@RequestMapping("/api/permits")
-@CrossOrigin(origins = "*")
-@RequiredArgsConstructor
-public class WorkPermitController {
+        List<WorkPermit> permits = workPermitService
+                .getPendingApprovals(user.getId(), user.getRole().getName());
 
-    private final WorkPermitService workPermitService;
+        return ResponseEntity.ok(permits);
+    }
+    // ✅ APPROVE PERMIT
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<?> approvePermit(@PathVariable Long id) {
 
-    // ✅ Create Permit
-    @PostMapping
-    public ResponseEntity<WorkPermit> createPermit(@RequestBody WorkPermitRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        WorkPermit updated = workPermitService.approvePermit(id, user);
 
-        Long userId = userDetails.getUserId();  // 🔥 dynamic
-
-        WorkPermit permit = workPermitService.createPermit(request, userId);
-        return ResponseEntity.ok(permit);
+        return ResponseEntity.ok(updated);
     }
 
-    // ✅ Get Active Permits
-    @GetMapping("/active")
-    public ResponseEntity<List<WorkPermit>> getActivePermits() {
-        return ResponseEntity.ok(workPermitService.getActivePermits());
+    // ✅ REJECT PERMIT
+    @PutMapping("/{id}/reject")
+    public ResponseEntity<?> rejectPermit(@PathVariable Long id) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        WorkPermit updated = workPermitService.rejectPermit(id, user);
+
+        return ResponseEntity.ok(updated);
     }
 
-    // ✅ Get History Permits
-    @GetMapping("/history")
-    public ResponseEntity<List<WorkPermit>> getHistoryPermits() {
-        return ResponseEntity.ok(workPermitService.getHistoryPermits());
-    }
 }

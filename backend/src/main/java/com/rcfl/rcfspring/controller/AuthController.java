@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private final AuthService authService;
@@ -39,9 +39,61 @@ public class AuthController {
         this.customUserDetailsService = customUserDetailsService;
     }
 
-    /* ==
-       RESPONSE DTO (MOVE THIS UP)
-       == */
+    /* =====================================
+       LOGIN
+       ===================================== */
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(
+            @Valid @RequestBody LoginRequest request
+    ) {
+
+        // 🔐 Step 1: Authenticate (Spring handles password check)
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+
+        // 🔐 Step 2: Load user details (for JWT)
+        UserDetails userDetails =
+                customUserDetailsService.loadUserByUsername(request.getEmail());
+
+        // 🔐 Step 3: Generate token
+        String token = tokenUtil.generateToken(userDetails);
+
+        // 🔐 Step 4: Build response
+        LoginResponse response = authService.login(request);
+
+        // 🔐 Step 5: Attach token
+        response.setToken(token);
+
+        return ResponseEntity.ok(response);
+    }
+
+    /* =====================================
+       CHANGE PASSWORD (FIRST LOGIN)
+       ===================================== */
+
+    @PostMapping("/change-password")
+    public ResponseEntity<ChangePasswordResponse> changePassword(
+            @Valid @RequestBody ChangePasswordRequest request,
+            org.springframework.security.core.Authentication authentication
+    ) {
+
+        String email = authentication.getName(); // 🔥 THIS IS KEY
+
+        authService.changePassword(email, request);
+
+        return ResponseEntity.ok(
+                new ChangePasswordResponse("Password changed successfully")
+        );
+    }
+
+    /* =====================================
+       RESPONSE DTO
+       ===================================== */
 
     public static class ChangePasswordResponse {
 
@@ -54,48 +106,5 @@ public class AuthController {
         public String getMessage() {
             return message;
         }
-    }
-
-    /* ==
-       LOGIN
-       == */
-
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(
-            @Valid @RequestBody LoginRequest request
-    ) {
-
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-
-        UserDetails userDetails =
-                customUserDetailsService.loadUserByUsername(request.getEmail());
-
-        String token = tokenUtil.generateToken(userDetails);
-
-        LoginResponse response = authService.login(request);
-        response.setToken(token);
-
-        return ResponseEntity.ok(response);
-    }
-
-    /* ==
-       CHANGE PASSWORD
-       == */
-
-    @PostMapping("/change-password")
-    public ResponseEntity<ChangePasswordResponse> changePassword(
-            @Valid @RequestBody ChangePasswordRequest request
-    ) {
-
-        authService.changePassword(request);
-
-        return ResponseEntity.ok(
-                new ChangePasswordResponse("Password changed successfully")
-        );
     }
 }

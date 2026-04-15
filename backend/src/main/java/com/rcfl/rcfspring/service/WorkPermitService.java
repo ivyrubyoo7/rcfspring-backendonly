@@ -1,4 +1,3 @@
-
 package com.rcfl.rcfspring.service;
 
 import com.rcfl.rcfspring.dto.request.*;
@@ -23,72 +22,79 @@ public class WorkPermitService {
     private final PlantRepository plantRepository;
     private final DepartmentRepository departmentRepository;
 
-    // === CREATE PERMIT ===
+    // ================= CREATE PERMIT =================
 
     public WorkPermit createPermit(WorkPermitRequest request, Long userId) {
 
         User creator = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Plant plant = plantRepository.findById(request.getPlantId())
-                .orElseThrow(() -> new RuntimeException("Plant not found"));
+        // ✅ PLANT ONLY (NO department dependency)
+        Plant plant;
+
+        if (creator.getPlant() != null) {
+            plant = creator.getPlant();
+        } else {
+            plant = plantRepository.findById(request.getPlantId())
+                    .orElseThrow(() -> new RuntimeException("Plant not found"));
+        }
 
         WorkPermit permit = new WorkPermit();
 
-        // === GENERATE PERMIT CODE ===
-
+        // Generate permit code
         String newPermitCode = "PTW-000001";
-
         WorkPermit lastPermit = workPermitRepository.findTopByOrderByIdDesc().orElse(null);
 
         if (lastPermit != null && lastPermit.getPermitCode() != null) {
-            String lastCode = lastPermit.getPermitCode(); // PTW-000123
-            int lastNumber = Integer.parseInt(lastCode.split("-")[1]);
+            int lastNumber = Integer.parseInt(lastPermit.getPermitCode().split("-")[1]);
             newPermitCode = String.format("PTW-%06d", lastNumber + 1);
         }
 
         permit.setPermitCode(newPermitCode);
-
-        // === BASIC DETAILS ===
-
         permit.setPlant(plant);
         permit.setZone(request.getZone());
         permit.setActivity(request.getActivity());
         permit.setWorkCategory(request.getWorkCategory());
-
         permit.setCreatedBy(creator);
         permit.setCreatedAt(LocalDateTime.now());
         permit.setUpdatedAt(LocalDateTime.now());
+        permit.setStatus("PENDING");
 
-        // === STATUS LOGIC ===
+        String workCategory = request.getWorkCategory().toUpperCase();
 
-        if ("STANDARD".equalsIgnoreCase(request.getWorkCategory())) {
+        // ================= FLEXIBLE ASSIGNMENT =================
+        // No failure if not found
 
-            permit.setStatus("PENDING");
+        User manager = userRepository.findAll().stream()
+                .filter(u -> u.getRole() != null)
+                .filter(u -> u.getRole().getName() != null)
+                .filter(u -> u.getRole().getName().toUpperCase().contains("MANAGER"))
+                .filter(u -> u.getPlant() != null)
+                .filter(u -> u.getPlant().getId().equals(plant.getId()))
+                .findFirst()
+                .orElse(null);
 
-            if (creator.getManager() != null) {
-                User manager = userRepository.findById(creator.getManager().getId())
-                        .orElseThrow(() -> new RuntimeException("Manager not found"));
-                permit.setAssignedManager(manager);
-            }
+        User officer = userRepository.findAll().stream()
+                .filter(u -> u.getRole() != null)
+                .filter(u -> u.getRole().getName() != null)
+                .filter(u -> u.getRole().getName().toUpperCase().contains("OFFICER"))
+                .filter(u -> u.getPlant() != null)
+                .filter(u -> u.getPlant().getId().equals(plant.getId()))
+                .findFirst()
+                .orElse(null);
 
-        } else if ("CRITICAL".equalsIgnoreCase(request.getWorkCategory())) {
-
-            permit.setStatus("PENDING");
-
-            User officer = userRepository.findAll().stream()
-                    .filter(u -> u.getRole().getName().equalsIgnoreCase("OFFICER"))
-                    .filter(u -> u.getPlant().getId().equals(plant.getId()))
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Officer not found"));
-
+        // Assign if available (no crash)
+        if ("STANDARD".equals(workCategory)) {
+            permit.setAssignedManager(manager);
+        } else {
             permit.setAssignedOfficer(officer);
         }
 
-        // 💾 SAVE PERMIT FIRST
+        // ================= SAVE =================
+
         WorkPermit savedPermit = workPermitRepository.save(permit);
 
-        // === SAVE DEPARTMENTS ===
+        // Departments (still saved but NOT used for logic)
         if (request.getDepartmentIds() != null) {
             request.getDepartmentIds().forEach(deptId -> {
                 Department dept = departmentRepository.findById(deptId)
@@ -97,12 +103,11 @@ public class WorkPermitService {
                 PermitDepartment pd = new PermitDepartment();
                 pd.setPermit(savedPermit);
                 pd.setDepartment(dept);
-
                 permitDepartmentRepository.save(pd);
             });
         }
 
-        // === SAVE PERSONNEL ===
+        // Personnel
         if (request.getPersonnel() != null) {
             request.getPersonnel().forEach(p -> {
                 PermitPersonnel person = new PermitPersonnel();
@@ -110,19 +115,17 @@ public class WorkPermitService {
                 person.setName(p.getName());
                 person.setRole(p.getRole());
                 person.setEmployeeId(p.getEmployeeId());
-
                 permitPersonnelRepository.save(person);
             });
         }
 
-        // === SAVE SAFETY ===
+        // Safety
         if (request.getSafetyChecklist() != null) {
             request.getSafetyChecklist().forEach(s -> {
                 PermitSafetyChecklist safety = new PermitSafetyChecklist();
                 safety.setPermit(savedPermit);
                 safety.setChecklistItem(s.getChecklistItem());
                 safety.setIsChecked(s.getIsChecked());
-
                 permitSafetyRepository.save(safety);
             });
         }
@@ -130,158 +133,66 @@ public class WorkPermitService {
         return savedPermit;
     }
 
-    // === GET ACTIVE ===
+    // ================= ACTIVE =================
+    public List<WorkPermit> getActivePermits(User user) {
 
-    public List<WorkPermit> getActivePermits() {
-        return workPermitRepository.findByStatus("PENDING");
-    }
+        String role = user.getRole().getName();
 
-    // === GET HISTORY ===
-
-    public List<WorkPermit> getHistoryPermits() {
-        return workPermitRepository.findByStatus("APPROVED");
-    }
-
-package com.rcfl.rcfspring.service;
-
-import com.rcfl.rcfspring.dto.request.*;
-import com.rcfl.rcfspring.entity.*;
-import com.rcfl.rcfspring.repository.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Service
-@RequiredArgsConstructor
-public class WorkPermitService {
-
-    private final WorkPermitRepository workPermitRepository;
-    private final PermitDepartmentRepository permitDepartmentRepository;
-    private final PermitPersonnelRepository permitPersonnelRepository;
-    private final PermitSafetyChecklistRepository permitSafetyRepository;
-
-    private final UserRepository userRepository;
-    private final PlantRepository plantRepository;
-    private final DepartmentRepository departmentRepository;
-
-    // === CREATE PERMIT ===
-
-    public WorkPermit createPermit(WorkPermitRequest request, Long userId) {
-
-        User creator = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        Plant plant = plantRepository.findById(request.getPlantId())
-                .orElseThrow(() -> new RuntimeException("Plant not found"));
-
-        WorkPermit permit = new WorkPermit();
-
-        // === GENERATE PERMIT CODE ===
-
-        String newPermitCode = "PTW-000001";
-
-        WorkPermit lastPermit = workPermitRepository.findTopByOrderByIdDesc().orElse(null);
-
-        if (lastPermit != null && lastPermit.getPermitCode() != null) {
-            String lastCode = lastPermit.getPermitCode(); // PTW-000123
-            int lastNumber = Integer.parseInt(lastCode.split("-")[1]);
-            newPermitCode = String.format("PTW-%06d", lastNumber + 1);
+        // 🔥 ADMIN → see all
+        if (role.equalsIgnoreCase("ADMIN")) {
+            return workPermitRepository.findAll();
         }
 
-        permit.setPermitCode(newPermitCode);
+        // 🔥 OFFICER / MANAGER → only their plant
+        Long plantId = user.getPlant().getId();
 
-        // === BASIC DETAILS ===
+        return workPermitRepository.findByPlantId(plantId);
+    }
 
-        permit.setPlant(plant);
-        permit.setZone(request.getZone());
-        permit.setActivity(request.getActivity());
-        permit.setWorkCategory(request.getWorkCategory());
+    // ================= HISTORY =================
+    public List<WorkPermit> getHistoryPermits() {
+        return workPermitRepository.findByStatusIn(List.of("APPROVED", "REJECTED", "CLOSED"));
+    }
 
-        permit.setCreatedBy(creator);
-        permit.setCreatedAt(LocalDateTime.now());
+    // ================= PENDING =================
+    public List<WorkPermit> getPendingApprovals(Long userId, String role) {
+
+        if (role.toUpperCase().contains("MANAGER")) {
+            return workPermitRepository
+                    .findByAssignedManager_IdAndStatus(userId, "PENDING");
+        }
+
+        if (role.toUpperCase().contains("OFFICER")) {
+            return workPermitRepository
+                    .findByAssignedOfficer_IdAndStatus(userId, "PENDING");
+        }
+
+        return List.of();
+    }
+
+    // ================= APPROVE =================
+    public WorkPermit approvePermit(Long permitId, User approver) {
+
+        WorkPermit permit = workPermitRepository.findById(permitId)
+                .orElseThrow(() -> new RuntimeException("Permit not found"));
+
+        permit.setStatus("APPROVED");
+        permit.setApprovedBy(approver);
         permit.setUpdatedAt(LocalDateTime.now());
 
-        // === STATUS LOGIC ===
-
-        if ("STANDARD".equalsIgnoreCase(request.getWorkCategory())) {
-
-            permit.setStatus("PENDING");
-
-            if (creator.getManager() != null) {
-                User manager = userRepository.findById(creator.getManager().getId())
-                        .orElseThrow(() -> new RuntimeException("Manager not found"));
-                permit.setAssignedManager(manager);
-            }
-
-        } else if ("CRITICAL".equalsIgnoreCase(request.getWorkCategory())) {
-
-            permit.setStatus("PENDING");
-
-            User officer = userRepository.findAll().stream()
-                    .filter(u -> u.getRole().getName().equalsIgnoreCase("OFFICER"))
-                    .filter(u -> u.getPlant().getId().equals(plant.getId()))
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Officer not found"));
-
-            permit.setAssignedOfficer(officer);
-        }
-
-        // 💾 SAVE PERMIT FIRST
-        WorkPermit savedPermit = workPermitRepository.save(permit);
-
-        // === SAVE DEPARTMENTS ===
-        if (request.getDepartmentIds() != null) {
-            request.getDepartmentIds().forEach(deptId -> {
-                Department dept = departmentRepository.findById(deptId)
-                        .orElseThrow(() -> new RuntimeException("Department not found"));
-
-                PermitDepartment pd = new PermitDepartment();
-                pd.setPermit(savedPermit);
-                pd.setDepartment(dept);
-
-                permitDepartmentRepository.save(pd);
-            });
-        }
-
-        // === SAVE PERSONNEL ===
-        if (request.getPersonnel() != null) {
-            request.getPersonnel().forEach(p -> {
-                PermitPersonnel person = new PermitPersonnel();
-                person.setPermit(savedPermit);
-                person.setName(p.getName());
-                person.setRole(p.getRole());
-                person.setEmployeeId(p.getEmployeeId());
-
-                permitPersonnelRepository.save(person);
-            });
-        }
-
-        // === SAVE SAFETY ===
-        if (request.getSafetyChecklist() != null) {
-            request.getSafetyChecklist().forEach(s -> {
-                PermitSafetyChecklist safety = new PermitSafetyChecklist();
-                safety.setPermit(savedPermit);
-                safety.setChecklistItem(s.getChecklistItem());
-                safety.setIsChecked(s.getIsChecked());
-
-                permitSafetyRepository.save(safety);
-            });
-        }
-
-        return savedPermit;
+        return workPermitRepository.save(permit);
     }
 
-    // === GET ACTIVE ===
+    // ================= REJECT =================
+    public WorkPermit rejectPermit(Long permitId, User approver) {
 
-    public List<WorkPermit> getActivePermits() {
-        return workPermitRepository.findByStatus("PENDING");
-    }
+        WorkPermit permit = workPermitRepository.findById(permitId)
+                .orElseThrow(() -> new RuntimeException("Permit not found"));
 
-    // === GET HISTORY ===
+        permit.setStatus("REJECTED");
+        permit.setApprovedBy(approver);
+        permit.setUpdatedAt(LocalDateTime.now());
 
-    public List<WorkPermit> getHistoryPermits() {
-        return workPermitRepository.findByStatus("APPROVED");
+        return workPermitRepository.save(permit);
     }
 }
